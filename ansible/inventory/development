@@ -1,27 +1,39 @@
-[baseservers]
-common1
-common2
-common3
+[all:children]
+logproject
 
-[elasticdb]
-elastic1
-elastic2
-elastic3
+[logproject:children]
+baseservers
+elastic
+logstash
+kibana
+proxy
+application
+db
+
+[baseservers]
+common1 ansible_connection=local
+common2 ansible_connection=local
+common3 ansible_connection=local
+
+[elastic]
+elastic1 ansible_connection=local
+elastic2 ansible_connection=local
+elastic3 ansible_connection=local
 
 [logstash]
-logstash1
-logstash2
+logstash1 ansible_connection=local
+logstash2 ansible_connection=local
 
 [kibana]
-logstash1
-logstash2
+logstash1 ansible_connection=local
+logstash2 ansible_connection=local
 
 [proxy]
-common1
+common1 ansible_connection=local
 
 [application]
-common2
-windows1
+common2 ansible_connection=local
+windows1 ansible_connection=local
 
 [db]
-common3
+common3 ansible_connection=local

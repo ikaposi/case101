@@ -1,0 +1,8 @@
+---
+- name: Install Elastic Stack Repositories 
+  copy: 
+    src: elastic.repo 
+    dest: /etc/yum.repos.d/elastic.repo 
+    owner: root 
+    group: root
+    mode: 0644

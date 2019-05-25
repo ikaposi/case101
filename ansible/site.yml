@@ -1,39 +1,49 @@
 ---
-- hosts: all
-roles:
-  - { role: common }
+- hosts: logproject
+  gather_facts: yes
+  become: yes
+  roles:
+  - { role: common, tags: ['common'] }
 
 - hosts: elastic
-roles:
-  - { role: elastic }
+  gather_facts: yes
+  become: yes
+  roles:
+  - { role: elastic, tags: ['elastic'] }
 
 - hosts: logstash
-roles:
-  - { role: logstash }
-  - { role: kibana }
+  become: yes
+  roles:
+  - { role: logstash, tags: ['logstash'] }
+  - { role: kibana, tags: ['kibana'] }
 
 - hosts: proxy
-roles:
-  - { role: nginx }
+  become: yes
+  roles:
+  - { role: nginx, tags: ['nginx'] }
 
 - hosts: app
-roles:
-  - { role: appserver }
+  become: yes
+  roles:
+  - { role: appserver, tags: ['appserver'] }
 
 - hosts: db
-roles:
-  - { role: mariadb }
-  
-- hosts: windows
-roles:
-  - { role: winlogbeat }
+  become: yes
+  roles:
+  - { role: mariadb, tags: ['mariadb'] }  
 
-- hosts: monitored
-roles:
-  - { role: packetbeat }
-  - { role: journalbeat }
-  - { role: filebeat }
-  - { role: auditbeat }
+- hosts: windows
+  become: yes
+  roles:
+  - { role: winlogbeat, tags: ['winlogbeat'] }
+
+- hosts: baseservers
+  become: yes
+  roles:
+  - { role: packetbeat, tags: ['packetbeat'] }
+  - { role: journalbeat, tags: ['journalbeat'] }
+  - { role: filebeat, tags: ['filebeat'] }
+  - { role: auditbeat, tags: ['auditbeat'] }
 
 
 
