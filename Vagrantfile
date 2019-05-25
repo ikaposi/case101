@@ -7,19 +7,20 @@ SCRIPT
 Vagrant.configure("2") do |config|
 # config.vm.box = "mwrock/Windows2016"
   BOX_IMAGE = "centos/7"
-  NODE_COUNT = 3
+  NODE_COUNT = 1
   LS_COUNT = 2
-  ELASTIC_COUNT = 3
+  ELASTIC_COUNT = 0
  # config.vm.define "master" do |subconfig|
  #   subconfig.vm.box = BOX_IMAGE
  # end  
- # (1..NODE_COUNT).each do |i|
- #   config.vm.define "node#{i}" do |subconfig|
- #     subconfig.vm.network "private_network", type: "dhcp"
- #     subconfig.vm.box = BOX_IMAGE
- #     subconfig.vm.hostname = "node"#{i}
- #   end
- # end
+  (1..NODE_COUNT).each do |j|
+    config.vm.define "node#{j}" do |subconfig|
+      subconfig.vm.network "public_network", type: "dhcp", bridge: "Intel(R) Ethernet Connection (2) I219-LM"
+      subconfig.vm.box = BOX_IMAGE
+      subconfig.vm.hostname = "node"#{j}
+      subconfig.vm.synced_folder "." "/vagrant", type: "virtualbox"
+    end
+  end
   (1..ELASTIC_COUNT).each do |i|
     config.vm.define "elastic#{i}" do |subconfig|
       subconfig.vm.box = BOX_IMAGE
