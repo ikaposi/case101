@@ -1,0 +1,40 @@
+---
+- hosts: all
+roles:
+  - { role: common }
+
+- hosts: elastic
+roles:
+  - { role: elastic }
+
+- hosts: logstash
+roles:
+  - { role: logstash }
+  - { role: kibana }
+
+- hosts: proxy
+roles:
+  - { role: nginx }
+
+- hosts: app
+roles:
+  - { role: appserver }
+
+- hosts: db
+roles:
+  - { role: mariadb }
+  
+- hosts: windows
+roles:
+  - { role: winlogbeat }
+
+- hosts: monitored
+roles:
+  - { role: packetbeat }
+  - { role: journalbeat }
+  - { role: filebeat }
+  - { role: auditbeat }
+
+
+
+
