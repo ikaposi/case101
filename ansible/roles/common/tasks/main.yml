@@ -6,3 +6,16 @@
     owner: root 
     group: root
     mode: 0644
+
+- name: Install required packages 
+  yum:
+    name: 
+      - java-1.8.0-openjdk
+      - chrony
+    state: present
+
+- name: enable Chronyd
+  service:
+    name: chronyd
+    enabled: yes
+    state: started

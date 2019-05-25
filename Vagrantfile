@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
       subconfig.vm.provision "ansible_local" do |ansible|
         ansible.playbook = "ansible/site.yml"
         ansible.verbose = "true"
+        ansible.become = "true"
         ansible.inventory_path = "ansible/inventory/development"
       end
     end
